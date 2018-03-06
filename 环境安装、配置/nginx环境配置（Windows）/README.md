@@ -31,6 +31,8 @@
                 location / {
                     root    '文件夹路径';
                     index   index.php index.html index.htm;
+                    try_files $uri $uri/ /index.html;
+                    #try_files $uri $uri/ /index.php?$query_string;
                     autoindex   on;
                 }
 
