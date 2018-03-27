@@ -17,9 +17,9 @@
 
         1. 当没有`key`属性或`key`属性相同时：最大化重用DOM。
         2. 切换的DOM的`key`属性不同：不重用DOM。
-    2. Vue实例代理`data`、`methods`、`computed`、`props`的属性内容，可以直接修改或调用；也有以`$`开头的实例属性（如`$el`、`$data`、`$watch`）。
+    2. Vue实例代理`data`、`methods`、`computed`、`props`的属性内容，可以直接修改或调用；也有以`$`开头的Vue实例属性（如`$el`、`$data`、`$watch`）。
 
-        只有已经被代理的内容是响应的，值的改变（可能）会触发视图的重新渲染。
+        只有已经被代理的内容是响应的（Vue实例被创建时的`data`、`computed`），值的改变（可能）会触发视图的重新渲染。
 
         1. 导致视图更新：
 
@@ -737,6 +737,9 @@
     // 在其他地方使用
     Vue.use(MyPlugin, { someOption: true })  // Vue.use会自动阻止多次注册相同插件，届时只会注册一次该插件。
     ```
+8. 虚拟DOM
+
+    在底层的实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，Vue能够智能地计算出最少需要重新渲染多少组件，并把DOM操作次数减到最少。
 
 ### [vue-router](https://github.com/vuejs/vue-router)
 >使用Charles代理到本地dev环境（map remote），要保证被代理和代理的路径相同，才能让路由正确。
