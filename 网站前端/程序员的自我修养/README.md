@@ -259,6 +259,44 @@
         3. ViewModel
 
             View与ViewModel双向绑定（data-binding），一个变动会触发另一个改变。
+11. 软编码、硬编码
+
+    1. 软编码
+
+        运行期间传入参数。
+    2. 硬编码
+    
+        将参数直接以固定值的形式写在源码中。
+    
+    ><details>
+    ><summary>e.g.</summary>
+    >
+    >```javascript
+    >// 最软
+    >function func(num) {
+    >  ...
+    >  if (value < num) 
+    >  ...
+    >}
+    >
+    >
+    >// 有点软
+    >const NUM = 10;
+    >function func() {
+    >  ...
+    >  if (value < NUM) 
+    >  ...
+    >}
+    >
+    >
+    >// 硬
+    >function func() {
+    >  ...
+    >  if (value < 10) 
+    >  ...
+    >}
+    >```
+    ></details>
 
 ### 数据库
 1. 数据库类型
