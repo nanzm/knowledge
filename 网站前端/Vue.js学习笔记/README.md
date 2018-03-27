@@ -758,20 +758,32 @@
         Vue单文件组件。目录中的`.vue`文件自动生成对应的路由配置和页面。
         
         <details>
-        <summary><code>pages</code>目录下组件新增几个方法</summary>
+        <summary><code>pages</code>目录下组件新增几个方法（其他目录下无效）</summary>
         
         1. `asyncData`
         
-            页面组件被初始化前调用。返回的数据与`data`方法返回的数据合并后返回当前页面组件。
+            页面组件被初始化前调用（组件还未创建，无法使用`this`引用组件实例）。`return`的数据与`data`方法返回的数据合并后返回当前页面组件。
         2. `fetch`
             
             在渲染页面前填充状态（store）的数据。
-        3. head
-        4. layout
-        5. middleware
-        6. scrollToTop
-        7. transition
-        8. validate
+        3. `head`
+        
+            覆盖`nuxt.config.js`的`head`属性。
+        4. `layout`
+        
+            引用`layout`目录的布局文件。
+        5. `middleware`
+        
+            引用`middleware`目录的中间件文件。
+        6. `scrollToTop`
+        
+            控制页面渲染前是否滚动至页面顶部。默认`false`。
+        7. `transition`
+        
+            Vue的`<transition>`组件配置。
+        8. `validate`
+        
+            用于校验动态路由参数的有效性。`return false`则自动加载显示404错误页面。
         </details>
     2. `assets`：待编译资源目录
     
@@ -1003,6 +1015,8 @@
         6. `head`
         
             配置HTML的头部信息。
+            
+            >`vmid`为`<meta>`的唯一的标识编号，用于覆盖父组件相同标签。
         7. `loading`
             
             配置加载组件。
