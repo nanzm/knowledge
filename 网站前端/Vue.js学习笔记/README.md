@@ -850,40 +850,7 @@
             }
             ```
             </details>
-    6. `layouts`：布局目录
-    
-        Vue单文件组件。扩展默认布局（`default.vue`、`error.vue`）或新增自定义布局。在布局文件中添加`<nuxt/>`指定页面主体内容。
-        
-        - 引用方式：`pages`目录下组件中加入`layout`属性
-
-            <details>
-            <summary><code>pages</code>目录下组件引用<code>layouts</code>目录下布局的方式</summary>
-            
-            ```html
-            <!-- layouts/布局文件名.vue -->
-            <template>
-              <div>
-                ...
-                <nuxt/>
-                ...
-              </div>
-            </template>
-            ...
-            ```
-            
-            ```javascript
-            // pages/页面名.vue
-            export default {
-              layout: '布局文件名',
-              // 或
-              layout (context) {
-                return '布局文件名'
-              },
-              ...
-            }
-            ```
-            </details>
-    7. `store`：状态目录
+    6. `store`：状态目录
     
         >若`store`目录存在，则：引入`vuex`->增加`vuex`至vendor配置->设置Vue根实例的`store`配置项。
     
@@ -940,9 +907,40 @@
                 ```
                 </details>
             2. 模块方式：`store`目录下每个`.js`文件被转换为**指定命名的子模块**，返回`state`数据方法、`mutations`操作对象，在同名的`pages`组件下使用`$store`
+    7. `layouts`：布局目录
+    
+        Vue单文件组件。扩展默认布局（`default.vue`、`error.vue`）或新增自定义布局，在布局文件中添加`<nuxt/>`指定页面主体内容。
+        
+        - 引用方式：`pages`目录下组件中加入`layout`属性
+
+            <details>
+            <summary><code>pages</code>目录下组件引用<code>layouts</code>目录下布局的方式</summary>
+            
+            ```html
+            <!-- layouts/布局文件名.vue -->
+            <template>
+              <div>
+                ...
+                <nuxt/>
+                ...
+              </div>
+            </template>
+            ...
+            ```
+            
+            ```javascript
+            // pages/页面名.vue
+            export default {
+              layout: '布局文件名',
+              ...
+            }
+            ```
+            </details>
     8. `middleware`：中间件目录
 
         JS文件。路由跳转之后，在页面渲染之前运行自定义函数。执行顺序：`nuxt.config.js`->`layouts`->`pages`。
+        
+        >可以做权限、UA等判断后执行跳转或其他行为。
         
         - 引用方式：`nuxt.config.js`文件或`layouts`或`pages`目录下组件中加入`middleware`属性
 
@@ -1146,7 +1144,7 @@
 
     <summary>视图</summary>
 
-    1. `layouts`目录
+    1. `layouts`布局目录
     2. `nuxt.config.js`的`head`属性
     3. 定制HTML模板
     
