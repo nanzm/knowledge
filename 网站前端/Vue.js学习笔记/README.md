@@ -987,7 +987,9 @@
         
             配置webpack构建。
             
-            1. `build.vendor`：添加公用插件`vendor.bundle.js`的模块，避免每个页面都打包一次插件，以减少项目bundle的体积。
+            1. `build.vendor`：
+            
+                添加进公用插件`vendor.bundle.js`，避免每个页面都打包一次插件，以减少项目bundle的体积。
             
                 <details>
                 <summary>e.g.</summary>
@@ -1039,7 +1041,9 @@
         
             配置覆盖默认的`vue-router`配置。
             
-            1. `router.mode`：配置路由模式（`history`或`hash`）
+            1. `router.mode`：
+            
+                配置路由模式（`history`或`hash`）。
             
                 <details>
                 <summary>e.g.</summary>
@@ -1048,6 +1052,22 @@
                 module.exports = {
                   router: {
                     mode: 'hash' // 默认是'history'
+                  },
+                  ...
+                };
+                ```
+                </details>            
+            2. `router.middleware`：
+            
+                配置全局中间件。
+            
+                <details>
+                <summary>e.g.</summary>
+                
+                ```javascript
+                module.exports = {
+                  router: {
+                    middleware: ['中间件文件名']
                   },
                   ...
                 };
