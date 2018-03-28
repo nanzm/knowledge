@@ -852,9 +852,9 @@
             </details>
     6. `store`：状态目录
     
-        >若`store`目录存在，则：引入`vuex`->增加`vuex`至vendor配置->设置Vue根实例的`store`配置项。
+        >若`store`目录存在，则：引入`vuex`->增加`vuex`至vendor->设置Vue根实例的`store`属性。
     
-        - 两种使用方式
+        1. 创建
         
             1. 普通方式：`store/index.js`返回`store`实例，即可在组件的实例内使用`$store`
             
@@ -873,10 +873,10 @@
                     },
                     mutations: { // 暴露的改变状态数据的方法
                       increment1(state, data) {  // 第一个参数是状态对象，第二个参数是调用方法的第二个参数
-                        state.counter1 += 1;
+                        state.counter1 += data;
                       },
                       increment2(state, data) {
-                        state.counter2 += 1;
+                        state.counter2 += data;
                       }
                     }
                   });
@@ -884,29 +884,33 @@
                 
                 export default createStore;
                 ```
-                
-                ```html
-                <!-- .vue组件中使用实例的$store：this.$store.commit('暴露方法名', 方法接收的第二个参数)、this.$store.state.状态数据 -->
-                <template>
-                  <button @click="func1">{{ $store.state.counter1 }}</button>
-                  <button @click="func2">{{ $store.state.counter2 }}</button>
-                </template>
- 
-                <script>
-                  export default {
-                    methods: {
-                      func1() {
-                        this.$store.commit('increment1');
-                      },
-                      func2() {
-                        this.$store.commit('increment2');
-                      }
-                    }
-                  };
-                </script>
-                ```
                 </details>
             2. 模块方式：`store`目录下每个`.js`文件被转换为**指定命名的子模块**，返回`state`数据方法、`mutations`操作对象，在同名的`pages`组件下使用`$store`
+        2. <details>
+           
+           <summary>使用</summary>
+        
+            ```html
+            <!-- .vue组件中使用实例的$store：this.$store.commit('暴露方法名', 方法接收的第二个参数)、this.$store.state.状态数据 -->
+            <template>
+              <button @click="func1">{{ $store.state.counter1 }}</button>
+              <button @click="func2">{{ $store.state.counter2 }}</button>
+            </template>
+
+            <script>
+              export default {
+                methods: {
+                  func1() {
+                    this.$store.commit('increment1', 1);
+                  },
+                  func2() {
+                    this.$store.commit('increment2', 1);
+                  }
+                }
+              };
+            </script>
+            ```
+            </details>
     7. `layouts`：布局目录
     
         Vue单文件组件。扩展默认布局（`default.vue`、`error.vue`）或新增自定义布局，在布局文件中添加`<nuxt/>`指定页面主体内容。
