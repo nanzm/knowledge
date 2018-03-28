@@ -749,7 +749,7 @@
 
 1. 功能
 
-    每一个Vuex应用的核心就是store（仓库）。“store”基本上就是一个容器，它包含着你的应用中大部分的状态 (state)。
+    每个Vuex应用的核心就是store（仓库）。“store”基本上就是一个容器，包含着应用中大部分的状态 (state)。
     
     1. Vuex的状态存储是响应式的。当Vue组件从store中读取状态时，若store中的状态发生变化，则相应的组件也会相应地得到高效更新。
     2. 不能直接改变store中的状态，仅能够显式地提交 (commit) mutation。
@@ -866,7 +866,7 @@
         
             1. 普通方式：
             
-                `store/index.js`返回`store`实例。
+                `store/index.js`导出`store`实例，包含`state`、`mutations`属性。
             
                 <details>
                 <summary>e.g.</summary>
@@ -897,7 +897,7 @@
                 </details>
             2. 模块方式：
             
-                `store`目录下每个`.js`文件被转换为以文件名命名的状态模块，返回`state`数据方法、`mutations`操作对象。
+                `store`目录下每个`.js`文件被转换为以文件名命名的状态模块，导出`state`、`mutations`。
         2. 使用
         
             <details>
