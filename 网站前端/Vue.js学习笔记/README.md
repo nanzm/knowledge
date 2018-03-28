@@ -747,12 +747,12 @@
 ### [vuex](https://github.com/vuejs/vuex)
 一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
-1. 功能
+1. 特点
 
-    每个Vuex应用的核心就是store（仓库）。“store”基本上就是一个容器，包含着应用中大部分的状态 (state)。
-    
-    1. Vuex的状态存储是响应式的。当Vue组件从store中读取状态时，若store中的状态发生变化，则相应的组件也会相应地得到高效更新。
-    2. 不能直接改变store中的状态，仅能够显式地提交 (commit) mutation。
+    >store：vuex的仓库，state的集合。
+
+    1. Vuex的状态存储是响应式的。若store中的状态发生变化，则有读取状态的组件也会相应地得到高效更新。
+    2. 不能直接改变store中的state，仅能够显式地commit mutation。
 
 ### [vue-cli](https://github.com/vuejs/vue-cli)
 快速构建Vue应用的脚手架，可以使用Vue官方或第三方模板来进行Vue应用的配置，一般包括webpack等工具的配置。
