@@ -745,6 +745,14 @@
 >使用Charles代理到本地dev环境（map remote），要保证被代理和代理的路径相同，才能让路由正确。
 
 ### [vuex](https://github.com/vuejs/vuex)
+一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+
+1. 功能
+
+    每一个Vuex应用的核心就是store（仓库）。“store”基本上就是一个容器，它包含着你的应用中大部分的状态 (state)。
+    
+    1. Vuex的状态存储是响应式的。当Vue组件从store中读取状态时，若store中的状态发生变化，则相应的组件也会相应地得到高效更新。
+    2. 不能直接改变store中的状态，仅能够显式地提交 (commit) mutation。
 
 ### [vue-cli](https://github.com/vuejs/vue-cli)
 快速构建Vue应用的脚手架，可以使用Vue官方或第三方模板来进行Vue应用的配置，一般包括webpack等工具的配置。
@@ -856,7 +864,9 @@
     
         1. 创建
         
-            1. 普通方式：`store/index.js`返回`store`实例，即可在组件的实例内使用`$store`
+            1. 普通方式：
+            
+                `store/index.js`返回`store`实例。
             
                 <details>
                 <summary>e.g.</summary>
@@ -885,11 +895,14 @@
                 export default createStore;
                 ```
                 </details>
-            2. 模块方式：`store`目录下每个`.js`文件被转换为**指定命名的子模块**，返回`state`数据方法、`mutations`操作对象，在同名的`pages`组件下使用`$store`
-        2. <details>
-           
-           <summary>使用</summary>
+            2. 模块方式：
+            
+                `store`目录下每个`.js`文件被转换为以文件名命名的状态模块，返回`state`数据方法、`mutations`操作对象。
+        2. 使用
         
+            <details>
+            <summary>创建了相关vue状态后，即可在组件的实例内使用<code>$store</code></summary>
+            
             ```html
             <!-- .vue组件中使用实例的$store：this.$store.commit('暴露方法名', 方法接收的第二个参数)、this.$store.state.状态数据 -->
             <template>
