@@ -766,7 +766,7 @@
             `mapState`：返回对象，可用于`computed`属性的简写
     2. `getters`
 
-        store的计算属性。
+        根据方法返回值的依赖而改变的类似state的值（类似vue的`computed`）。
 
         - 辅助函数
 
@@ -796,16 +796,12 @@
     >```javascript
     >const store = new Vuex.Store({
     >  state: {
-    >    count: 0,
-    >    todos: [
-    >      { id: 1, done: true },
-    >      { id: 2, done: false }
-    >    ]
+    >    count: 0
     >  },
     >
     >  getters: {
-    >    doneTodos: state => {
-    >      return state.todos.filter(todo => todo.done);
+    >    count2: (state) => {
+    >      return state.count;
     >    }
     >  },
     >
