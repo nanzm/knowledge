@@ -418,7 +418,7 @@
         <details>
         <summary>生命周期图示</summary>
         
-        ![生命周期](./images/vue-lifecycle-1.png)
+        ![vue生命周期](./images/vue-lifecycle-1.png)
         </details>
     9. `mixins`（数组，单项为Vue属性对象）：混合
 
@@ -745,14 +745,16 @@
 >使用Charles代理到本地dev环境（map remote），要保证被代理和代理的路径相同，才能让路由正确。
 
 ### [vuex](https://github.com/vuejs/vuex)
-一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态（仅一个实例对象保存整个应用的状态，“唯一数据源”），并以相应的规则保证状态以一种可预测的方式发生变化。
+
+![vuex流程图](./images/vuex-1.png)
 
 1. 特点
 
     >store：vuex的仓库，state的集合。
 
     1. Vuex的状态存储是响应式的。若store中的状态发生变化，则有读取状态的组件也会相应地得到高效更新。
-    2. 不能直接改变store中的state，仅能够显式地commit mutation。
+    2. 不能直接改变store中的state，仅能够显式地commit mutation去改变。
 
 ### [vue-cli](https://github.com/vuejs/vue-cli)
 快速构建Vue应用的脚手架，可以使用Vue官方或第三方模板来进行Vue应用的配置，一般包括webpack等工具的配置。
@@ -1117,7 +1119,7 @@
     <details>
     <summary>流程图</summary>
     
-    ![流程图](./images/nuxt-schema-1.png)
+    ![nuxt流程图](./images/nuxt-1.png)
     </details>
     
     Vue组件的生命周期钩子中，仅有`beforeCreate`、`created`在客户端和服务端均被调用，其他钩子仅在客户端被调用。
