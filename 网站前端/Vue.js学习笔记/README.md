@@ -751,7 +751,7 @@
 
 1. 特点
 
-    >store：vuex的仓库，state的集合。
+    >store：vuex提供的容器，state的集合。
 
     1. Vuex的状态存储是响应式的。若store中的状态发生变化，则有读取状态的组件也会相应地得到高效更新。
     2. 不能直接改变store中的state，仅能够显式地commit mutation去改变。
