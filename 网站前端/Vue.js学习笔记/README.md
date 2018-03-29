@@ -790,39 +790,40 @@
 
 
     ><details>
+    >
     ><summary>e.g.</summary>
-
-    ```javascript
-    const store = new Vuex.Store({
-      state: {
-        count: 0,
-        todos: [
-          { id: 1, done: true },
-          { id: 2, done: false }
-        ]
-      },
-
-      getters: {
-        doneTodos: state => {
-          return state.todos.filter(todo => todo.done);
-        }
-      },
-
-      mutations: {
-        increment (state, 参数) {
-          // 仅同步操作
-          state.count++;
-        }
-      },
-
-      actions: {
-        increment (context, 参数) {   // store.dispatch('increment')触发
-          // 可异步操作，也可以返回Promise对象
-          context.commit('increment');
-        }
-      }
-    })
-    ```
+    >
+    >```javascript
+    >const store = new Vuex.Store({
+    >  state: {
+    >    count: 0,
+    >    todos: [
+    >      { id: 1, done: true },
+    >      { id: 2, done: false }
+    >    ]
+    >  },
+    >
+    >  getters: {
+    >    doneTodos: state => {
+    >      return state.todos.filter(todo => todo.done);
+    >    }
+    >  },
+    >
+    >  mutations: {
+    >    incrementA (state, 参数) {    // store.commit('incrementA')触发
+    >      // 仅同步操作
+    >      state.count++;
+    >    }
+    >  },
+    >
+    >  actions: {
+    >    incrementB (context, 参数) {  // store.dispatch('incrementB')触发
+    >      // 可异步操作，也可以返回Promise对象
+    >      context.commit('incrementA');
+    >    }
+    >  }
+    >})
+    >```
     ></details>
 2. 模块导出方式
 
