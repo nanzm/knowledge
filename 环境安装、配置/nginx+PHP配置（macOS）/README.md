@@ -41,7 +41,7 @@
                     listen       80;
                     server_name  localhost;
 
-                    root 文件夹路径;
+                    root 文件夹路径; # 如/Users/Geoffrey/www
                     location / {
                         index index.php index.html index.htm;
                         try_files $uri $uri/ /index.php?$query_string;
@@ -76,7 +76,7 @@
                     listen       80;
                     server_name  域名1;
 
-                    root 文件夹路径;
+                    root 文件夹路径; # 如/Users/Geoffrey/www/demo/dev.me
                     location / {
                         index index.php index.html;
                         try_files $uri $uri/ /index.php?$query_string;

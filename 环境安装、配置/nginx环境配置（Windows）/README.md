@@ -29,7 +29,7 @@
                 server_name localhost;
 
                 location / {
-                    root    '文件夹路径';
+                    root    '文件夹路径';    # 如'E:\www'
                     index   index.php index.html index.htm;
                     try_files $uri $uri/ /index.html;
                     #try_files $uri $uri/ /index.php?$query_string;
@@ -57,7 +57,7 @@
                 server_name 域名1;
 
                 location / {
-                    root    '文件夹路径';
+                    root    '文件夹路径';    # 如'E:\www\demo\dev.me'
                     index   index.php index.html;
                     autoindex   on;
                 }
