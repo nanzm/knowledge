@@ -745,16 +745,86 @@
 >使用Charles代理到本地dev环境（map remote），要保证被代理和代理的路径相同，才能让路由正确。
 
 ### [vuex](https://github.com/vuejs/vuex)
-一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态（仅一个实例对象保存整个应用的状态，“唯一数据源”），并以相应的规则保证状态以一种可预测的方式发生变化。
+>store的概念：vuex提供的容器，state的集合。
+
+一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态（仅一个实例对象就能负责保存整个应用的状态，“唯一数据源”），并以相应的规则保证状态以一种可预测的方式发生变化。Vuex的状态存储是响应式的，若store中的状态发生变化，则有读取状态的组件（`computed`依赖状态或直接输出状态）也会相应地得到高效更新。
 
 ![vuex流程图](./images/vuex-1.png)
 
-1. 特点
+1. 核心
 
-    >store：vuex提供的容器，state的集合。
+    1. `state`
 
-    1. Vuex的状态存储是响应式的。若store中的状态发生变化，则有读取状态的组件也会相应地得到高效更新。
-    2. 不能直接改变store中的state，仅能够显式地commit mutation去改变。
+        状态。仅能通过mutation方法改变state。
+
+        1. 最好提前初始化所需的state。
+        2. 需要在对象上添加新属性使用`Vue.set(对象, '新属性名', 值)`。
+        3. 直接用`=`进行新对象替换老对象。
+
+        - 辅助函数
+
+            `mapState`：返回对象，可用于`computed`属性的简写
+    2. `getters`
+
+        store的计算属性。
+
+        - 辅助函数
+
+            `mapGetters`
+    3. `mutations`
+
+        改变state的唯一方式。
+
+        1. 通过store调用`commit('mutation方法名'[, 参数])`触发。
+        2. 必须是同步函数。
+
+        - 辅助函数
+
+            `mapMutations`
+    4. `actions`
+
+        仅commit mutation，而不直接改变~~state~~。
+
+        1. 通过store调用`dispatch('action方法名'[, 参数])`触发。
+        2. 可以进行异步操作。
+
+
+    ><details>
+    ><summary>e.g.</summary>
+
+    ```javascript
+    const store = new Vuex.Store({
+      state: {
+        count: 0,
+        todos: [
+          { id: 1, done: true },
+          { id: 2, done: false }
+        ]
+      },
+
+      getters: {
+        doneTodos: state => {
+          return state.todos.filter(todo => todo.done);
+        }
+      },
+
+      mutations: {
+        increment (state, 参数) {
+          // 仅同步操作
+          state.count++;
+        }
+      },
+
+      actions: {
+        increment (context, 参数) {   // store.dispatch('increment')触发
+          // 可异步操作，也可以返回Promise对象
+          context.commit('increment');
+        }
+      }
+    })
+    ```
+    ></details>
+2. 模块导出方式
 
 ### [vue-cli](https://github.com/vuejs/vue-cli)
 快速构建Vue应用的脚手架，可以使用Vue官方或第三方模板来进行Vue应用的配置，一般包括webpack等工具的配置。
