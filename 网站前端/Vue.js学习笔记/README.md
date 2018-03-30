@@ -788,32 +788,35 @@
         1. 通过store调用`dispatch('action方法名'[, 参数])`触发。
         2. 可以进行异步操作。
 
-
     ><details>
     >
     ><summary>e.g.</summary>
     >
     >```javascript
     >const store = new Vuex.Store({
-    >  state: {
-    >    count: 0
+    >  state: { // 暴露的state数据
+    >    count1: 0,
+    >    count2: 0
     >  },
     >
-    >  getters: {
-    >    count2: (state) => {
-    >      return state.count;
+    >  getters: { // 暴露的state计算数据
+    >    count3: (state, getters) => { // 第一个参数是state对象，第二个参数是getters对象
+    >      return state.count1;
+    >    },
+    >    count4: (state, getters) => {
+    >      return state.count2 + getters.count3;
     >    }
     >  },
     >
-    >  mutations: {
-    >    incrementA (state, 参数) {    // store.commit('incrementA')触发
+    >  mutations: {  // 暴露的改变state的方法
+    >    incrementA (state, 参数) { // 第一个参数是state对象，第二个参数是commit调用方法的第二个参数
     >      // 仅同步操作
-    >      state.count++;
+    >      state.count1++;
     >    }
     >  },
     >
-    >  actions: {
-    >    incrementB (context, 参数) {  // store.dispatch('incrementB')触发
+    >  actions: {  // 暴露的触发mutations的方法
+    >    incrementB (context, 参数) {  // 第一个参数是Vuex实例对象，第二个参数是dispatch调用方法的第二个参数
     >      // 可异步操作，也可以返回Promise对象
     >      context.commit('incrementA');
     >    }
@@ -935,33 +938,50 @@
         
             1. 普通方式：
             
-                `store/index.js`导出`store`实例，包含`state`、`mutations`属性。
+                `store/index.js`导出`store`实例，包含`state`、`getters`、`mutations`、`actions`。
             
                 <details>
                 <summary>e.g.</summary>
                 
                 ```javascript
-                // store/index.js暴露了状态数据和改变方法
+                // store/index.js
                 import Vuex from 'vuex';
                 
-                const createStore = () => {
+                export default () => {
                   return new Vuex.Store({
-                    state: { // 暴露的状态数据
+                    state: {
                       counter1: 0,
                       counter2: 0
                     },
-                    mutations: { // 暴露的改变状态数据的方法
-                      increment1(state, data) {  // 第一个参数是状态对象，第二个参数是调用方法的第二个参数
+                    
+                    getters: {
+                      num1(state, getters) {
+                        return state.counter1;
+                      },
+                      num2(state, getters) {
+                        return state.counter2 * getters.num1;
+                      },
+                    },
+                    
+                    mutations: {
+                      increment1(state, data) {
                         state.counter1 += data;
                       },
                       increment2(state, data) {
                         state.counter2 += data;
                       }
+                    },
+                    
+                    actions: {
+                      increment1(context, data) {
+                        context.commit('increment1', data);
+                      },
+                      increment2(context, data) {
+                        context.commit('increment2', data);
+                      },
                     }
                   });
                 };
-                
-                export default createStore;
                 ```
                 </details>
             2. 模块方式：
@@ -1278,7 +1298,7 @@
     >增加`-h`参数查看nuxt命令可带参数。
 6. 开发模式
 
-    为避免跨域而使用代理转发时，若nginx代理转发出现问题，则可以尝试使用whistle。
+    为避免跨域而使用代理转发时，若nginx代理转发出现问题，则可以尝试使用[whistle](https://github.com/avwo/whistle)。
 7. 输出至生产环境的方案
 
     1. SSR：服务器渲染（与开发模式的SSR相同）。
