@@ -990,13 +990,19 @@
         2. 使用
         
             <details>
-            <summary>创建并自动设置Vue根实例的`store`属性后，即可在组件的实例内使用<code>$store</code></summary>
+            <summary>创建并自动设置Vue根实例的<code>store</code>属性后，即可在组件的实例内使用<code>$store</code></summary>
             
             ```html
-            <!-- .vue组件中使用实例的$store：this.$store.commit('暴露方法名', 方法接收的第二个参数)、this.$store.state.状态数据 -->
+            <!-- 
+            .vue组件中使用实例的$store：
+            this.$store.state.状态数据、
+            this.$store.getters.状态计算数据、
+            this.$store.commit('mutation名', 第二个参数)、
+            this.$store.dispatch('action名', 第二个参数)
+            -->
             <template>
               <button @click="func1">{{ $store.state.counter1 }}</button>
-              <button @click="func2">{{ $store.state.counter2 }}</button>
+              <button @click="func2">{{ $store.getters.num2 }}</button>
             </template>
 
             <script>
@@ -1006,7 +1012,7 @@
                     this.$store.commit('increment1', 1);
                   },
                   func2() {
-                    this.$store.commit('increment2', 1);
+                    this.$store.dispatch('increment1', 1);
                   }
                 }
               };
