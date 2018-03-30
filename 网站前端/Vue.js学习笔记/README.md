@@ -747,7 +747,7 @@
 ### [vuex](https://github.com/vuejs/vuex)
 >store的概念：vuex提供的容器，state的集合。
 
-一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态（仅一个实例对象就能负责保存整个应用的状态，“唯一数据源”），并以相应的规则保证状态以一种可预测的方式发生变化。Vuex的状态存储是响应式的，若store中的状态发生变化，则有读取状态的组件（`computed`依赖状态或直接输出状态）也会相应地得到高效更新。
+一个专为Vue.js应用程序开发的**状态管理模式**。采用集中式存储管理应用的所有组件的状态（仅一个实例对象就能负责保存整个应用的状态，“唯一数据源”），并以相应的规则保证状态以一种可预测的方式发生变化。vuex的状态存储是响应式的，若store中的状态发生变化，则有读取状态的组件（`computed`依赖状态或直接输出状态）也会相应地得到高效更新。
 
 ![vuex流程图](./images/vuex-1.png)
 
@@ -816,7 +816,7 @@
     >  },
     >
     >  actions: {  // 暴露的触发mutations的方法
-    >    incrementB (context, 参数) {  // 第一个参数是Vuex实例对象，第二个参数是dispatch调用方法的第二个参数
+    >    incrementB (context, 参数) {  // 第一个参数是Vuex.Store实例对象，第二个参数是dispatch调用方法的第二个参数
     >      // 可异步操作，也可以返回Promise对象
     >      context.commit('incrementA');
     >    }
@@ -938,7 +938,7 @@
         
             1. 普通方式：
             
-                `store/index.js`导出`store`实例，包含`state`、`getters`、`mutations`、`actions`。
+                `store/index.js`导出Vuex.Store实例对象，包含`state`、`getters`、`mutations`、`actions`。
             
                 <details>
                 <summary>e.g.</summary>
@@ -986,11 +986,11 @@
                 </details>
             2. 模块方式：
             
-                `store`目录下每个`.js`文件被转换为以文件名命名的状态模块，导出`state`、`mutations`。
+                `store`目录下每个`.js`文件被转换为以文件名命名的状态模块，导出`state`、`getters`、`mutations`、`actions`。
         2. 使用
         
             <details>
-            <summary>创建了相关vue状态后，即可在组件的实例内使用<code>$store</code></summary>
+            <summary>创建并自动设置Vue根实例的`store`属性后，即可在组件的实例内使用<code>$store</code></summary>
             
             ```html
             <!-- .vue组件中使用实例的$store：this.$store.commit('暴露方法名', 方法接收的第二个参数)、this.$store.state.状态数据 -->
